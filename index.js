@@ -4,12 +4,14 @@ const cos = new COS({
   SecretKey: 'pegXDj4FF4k5ILG1c3TmcLuKaigWDSWW'
 });
 const imgBaseURL = 'https://files-1257979020.cos.ap-chengdu.myqcloud.com/';
+const config = {
+  Bucket: 'files-1257979020',
+  Region: 'ap-chengdu',
+};
 
-cos.getBucket({
-  Bucket: 'files-1257979020', /* 必须 */
-  Region: 'ap-chengdu',     /* 存储桶所在地域，必须字段 */
-}, (err, data) => {
-  if(err) {
+
+cos.getBucket(config, (err, data)=> {
+  if (err) {
     return;
   }
   const content = document.getElementById('container');
@@ -18,6 +20,24 @@ cos.getBucket({
     content.appendChild(child);
   })
 });
+
+function putCOSObject({
+  key: Key,
+  body: Body,
+  onProgress,
+  onSuccess,
+  onError,
+}) {
+  cos.putObject({
+    ...config,
+    Key,              /* 必须 */
+    StorageClass: 'STANDARD',
+    Body, // 上传文件对象
+    onProgress,
+  }, function (err, data) {
+    err ? onError(err) : onSuccess(data);
+  });
+}
 
 function renderImage(url) {
   const img = new Image();
