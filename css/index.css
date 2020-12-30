@@ -1,8 +1,89 @@
 .container {
   display: flex;
-  /* flex-direction: column; */
+  flex-direction: column;
 }
 
-.container > img {
-  image-orientation: from-image;
+.header {
+  padding: 20px 50px;
+}
+
+.content {
+  display: flex;
+  width: 100vw;
+  flex-wrap: wrap;
+  padding: 10px 0;
+}
+
+.content div {
+  width: 300px;
+  height: 203px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, .3);
+  margin: 10px 0 0 10px;
+  transition: all .2s;
+  cursor: pointer;
+}
+
+.content div:hover {
+  transform: scale(1.1);
+}
+
+.content img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: 200%;
+  max-height: 200%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+.content p {
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 173px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 12px;
+  padding: 0 20px;
+  background-color: #fff;
+}
+
+.container-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px 0;
+  background-color: #fff;
+  box-shadow: 1px 1px 5px 0 #000;
+}
+
+.container-menu > * {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.container-menu > *:hover {
+  background-color: rgb(27, 216, 153);
+  color: #fff;
+}
+
+.container-loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: loading 1s linear infinite;
+}
+
+@keyframes loading {
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
